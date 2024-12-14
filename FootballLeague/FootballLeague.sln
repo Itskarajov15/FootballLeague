@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4BCC54F0-24A0-4F0D-A8A5-376FB341781D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballLeague.Domain", "src\FootballLeague.Domain\FootballLeague.Domain.csproj", "{0D798F14-AF96-4827-A98C-F5205B09D022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballLeague.Application", "src\FootballLeague.Application\FootballLeague.Application.csproj", "{D455E8AE-844D-4AD0-89A2-E7B145004720}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D798F14-AF96-4827-A98C-F5205B09D022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D798F14-AF96-4827-A98C-F5205B09D022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D798F14-AF96-4827-A98C-F5205B09D022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D798F14-AF96-4827-A98C-F5205B09D022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D455E8AE-844D-4AD0-89A2-E7B145004720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D455E8AE-844D-4AD0-89A2-E7B145004720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D455E8AE-844D-4AD0-89A2-E7B145004720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D455E8AE-844D-4AD0-89A2-E7B145004720}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D798F14-AF96-4827-A98C-F5205B09D022} = {4BCC54F0-24A0-4F0D-A8A5-376FB341781D}
+		{D455E8AE-844D-4AD0-89A2-E7B145004720} = {4BCC54F0-24A0-4F0D-A8A5-376FB341781D}
+	EndGlobalSection
+EndGlobal
