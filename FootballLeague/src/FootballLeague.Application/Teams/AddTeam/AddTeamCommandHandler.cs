@@ -21,7 +21,7 @@ internal sealed class AddTeamCommandHandler : IRequestHandler<AddTeamCommand, Gu
     {
         Team team = Team.Create(request.Name);
 
-        _teamRepository.AddTeam(team);
+        _teamRepository.Add(team);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

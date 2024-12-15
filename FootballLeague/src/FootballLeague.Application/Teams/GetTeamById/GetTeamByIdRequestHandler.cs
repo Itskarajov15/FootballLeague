@@ -20,7 +20,7 @@ internal class GetTeamByIdRequestHandler : IRequestHandler<GetTeamByIdQuery, Tea
 
     public async Task<TeamDto> Handle(GetTeamByIdQuery request, CancellationToken cancellationToken)
     {
-        Team team = await _teamRepository.GetTeamByIdAsync(request.Id);
+        Team team = await _teamRepository.GetByIdAsync(request.Id);
 
         TeamDto teamDto = _mapper.Map<TeamDto>(team);
 

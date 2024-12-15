@@ -2,13 +2,13 @@
 
 public interface ITeamRepository
 {
-    Task<Team> GetTeamByIdAsync(Guid id);
+    Task<Team> GetByIdAsync(Guid id);
 
-    Task<IEnumerable<Team>> GetAllTeamsAsync();
+    Task<IEnumerable<Team>> GetAllAsync();
 
-    void AddTeam(Team team);
+    void Add(Team team);
 
-    void UpdateTeam(Team team);
+    void Update(Team team);
 
-    void DeleteTeam(Team team);
+    void Delete(Team team);
 }

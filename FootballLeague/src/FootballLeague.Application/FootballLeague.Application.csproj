@@ -17,8 +17,4 @@
     <ProjectReference Include="..\FootballLeague.Domain\FootballLeague.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Matches\DeleteMatch\" />
-  </ItemGroup>
-
 </Project>

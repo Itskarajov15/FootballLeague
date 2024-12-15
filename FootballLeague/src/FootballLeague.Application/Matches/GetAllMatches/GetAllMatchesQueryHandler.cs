@@ -20,7 +20,7 @@ internal sealed class GetAllMatchesQueryHandler : IRequestHandler<GetAllMatchesQ
 
     public async Task<IEnumerable<MatchDto>> Handle(GetAllMatchesQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Match> matches = await _matchRepository.GetAllMatchesAsync();
+        IEnumerable<Match> matches = await _matchRepository.GetAllAsync();
 
         return _mapper.Map<IEnumerable<MatchDto>>(matches);
     }

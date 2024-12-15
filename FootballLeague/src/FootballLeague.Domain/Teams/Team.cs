@@ -1,5 +1,6 @@
 ﻿using FootballLeague.Domain.Abstractions;
 using FootballLeague.Domain.Shared;
+using System.Xml.Serialization;
 
 namespace FootballLeague.Domain.Teams;
 
@@ -34,7 +35,7 @@ public sealed class Team : Entity
         return new Team(Guid.NewGuid(), name);
     }
 
-    public void UpdateStatistics(int points)
+    public void AddPoints(int points)
     {
         MatchesPlayed++;
 
@@ -48,6 +49,24 @@ public sealed class Team : Entity
                 break;
             case 0:
                 Losses++;
+                break;
+        }
+    }
+
+    public void RemovePoints(int points)
+    {
+        MatchesPlayed--;
+
+        switch (points)
+        {
+            case 3:
+                Wins--;
+                break;
+            case 1:
+                Draws--;
+                break;
+            case 0:
+                Losses--;
                 break;
         }
     }

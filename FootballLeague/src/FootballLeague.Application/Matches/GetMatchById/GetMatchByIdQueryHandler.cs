@@ -20,7 +20,7 @@ internal sealed class GetMatchByIdQueryHandler : IRequestHandler<GetMatchByIdQue
 
     public async Task<MatchDto> Handle(GetMatchByIdQuery request, CancellationToken cancellationToken)
     {
-        Match match = await _matchRepository.GetMatchByIdAsync(request.Id);
+        Match match = await _matchRepository.GetByIdAsync(request.Id);
 
         return _mapper.Map<MatchDto>(match);
     }

@@ -2,13 +2,15 @@
 
 public interface IMatchRepository
 {
-    Task<Match> GetMatchByIdAsync(Guid id);
+    Task<Match> GetByIdAsync(Guid id);
 
-    Task<IEnumerable<Match>> GetAllMatchesAsync();
+    Task<IEnumerable<Match>> GetAllAsync();
 
-    void AddMatch(Match match);
+    Task<IEnumerable<Match>> GetMatchesByTeamIdAsync(Guid teamId);
 
-    void UpdateMatch(Match match);
+    void Add(Match match);
 
-    void DeleteMatch(Match match);
+    void Update(Match match);
+
+    void Delete(Match match);
 }

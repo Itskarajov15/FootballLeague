@@ -20,7 +20,7 @@ internal class GetAllTeamsQueryHandler : IRequestHandler<GetAllTeamsQuery, IEnum
 
     public async Task<IEnumerable<TeamDto>> Handle(GetAllTeamsQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<Team> teams = await _teamRepository.GetAllTeamsAsync();
+        IEnumerable<Team> teams = await _teamRepository.GetAllAsync();
 
         IEnumerable<TeamDto> teamDtos = _mapper.Map<IEnumerable<TeamDto>>(teams);
 
