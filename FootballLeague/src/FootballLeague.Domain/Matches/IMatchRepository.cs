@@ -2,7 +2,7 @@
 
 public interface IMatchRepository
 {
-    Task<Match> GetByIdAsync(Guid id);
+    Task<Match?> GetByIdAsync(Guid id);
 
     Task<IEnumerable<Match>> GetAllAsync();
 

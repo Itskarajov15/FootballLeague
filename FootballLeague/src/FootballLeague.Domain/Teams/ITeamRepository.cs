@@ -2,7 +2,7 @@
 
 public interface ITeamRepository
 {
-    Task<Team> GetByIdAsync(Guid id);
+    Task<Team?> GetByIdAsync(Guid id);
 
     Task<IEnumerable<Team>> GetAllAsync();
 
