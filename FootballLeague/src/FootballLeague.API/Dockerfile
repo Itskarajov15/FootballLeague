@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER $APP_UID
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["src/FootballLeague.API/FootballLeague.API.csproj", "src/FootballLeague.API/"]
+COPY ["src/FootballLeague.Application/FootballLeague.Application.csproj", "src/FootballLeague.Application/"]
+COPY ["src/FootballLeague.Domain/FootballLeague.Domain.csproj", "src/FootballLeague.Domain/"]
+COPY ["src/FootballLeague.Infrastructure/FootballLeague.Infrastructure.csproj", "src/FootballLeague.Infrastructure/"]
+RUN dotnet restore "./src/FootballLeague.API/FootballLeague.API.csproj"
+COPY . .
+WORKDIR "/src/src/FootballLeague.API"
+RUN dotnet build "./FootballLeague.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./FootballLeague.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "FootballLeague.API.dll"]

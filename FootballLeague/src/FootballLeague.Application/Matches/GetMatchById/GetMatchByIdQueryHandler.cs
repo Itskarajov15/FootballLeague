@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FootballLeague.Application.Common.Exceptions;
 using FootballLeague.Application.Dtos.Match;
 using FootballLeague.Domain.Matches;
 using MediatR;
@@ -20,7 +21,12 @@ internal sealed class GetMatchByIdQueryHandler : IRequestHandler<GetMatchByIdQue
 
     public async Task<MatchDto> Handle(GetMatchByIdQuery request, CancellationToken cancellationToken)
     {
-        Match match = await _matchRepository.GetByIdAsync(request.Id);
+        Match? match = await _matchRepository.GetByIdAsync(request.Id);
+
+        if (match is null)
+        {
+            throw new NotFoundException(nameof(Match), request.Id);
+        }
 
         return _mapper.Map<MatchDto>(match);
     }

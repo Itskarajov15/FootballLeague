@@ -14,12 +14,14 @@ internal sealed class MatchConfiguration : IEntityTypeConfiguration<Match>
         builder
             .HasOne<Team>()
             .WithMany()
-            .HasForeignKey(m => m.Team1Id);
+            .HasForeignKey(m => m.Team1Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder
             .HasOne<Team>()
             .WithMany()
-            .HasForeignKey(m => m.Team2Id);
+            .HasForeignKey(m => m.Team2Id)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(m => m.Team2Id)
             .IsRequired();

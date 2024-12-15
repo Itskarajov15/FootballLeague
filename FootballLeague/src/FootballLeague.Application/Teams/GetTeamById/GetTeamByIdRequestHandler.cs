@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FootballLeague.Application.Common.Exceptions;
 using FootballLeague.Application.Dtos.Team;
 using FootballLeague.Domain.Teams;
 using MediatR;
@@ -20,10 +21,13 @@ internal class GetTeamByIdRequestHandler : IRequestHandler<GetTeamByIdQuery, Tea
 
     public async Task<TeamDto> Handle(GetTeamByIdQuery request, CancellationToken cancellationToken)
     {
-        Team team = await _teamRepository.GetByIdAsync(request.Id);
+        Team? team = await _teamRepository.GetByIdAsync(request.Id);
 
-        TeamDto teamDto = _mapper.Map<TeamDto>(team);
+        if (team is null)
+        {
+            throw new NotFoundException(nameof(Team), request.Id);
+        }
 
-        return teamDto;
+        return _mapper.Map<TeamDto>(team);
     }
 }

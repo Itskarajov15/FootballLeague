@@ -30,5 +30,7 @@ internal sealed class RankingRepository : IRankingRepository
                 .Where(m => m.Team2Id == t.Id)
                 .Sum(m => m.Team2Score)
         })
+        .OrderByDescending(t => t.Points)
+        .ThenByDescending(t => t.GoalsScored)
         .ToListAsync();
 }

@@ -4,9 +4,9 @@ public class MatchDto
 {
     public Guid Id { get; set; }
 
-    public string Team1Name { get; set; } = null!;
+    public Guid Team1Id { get; set; }
 
-    public string Team2Name { get; set; } = null!;
+    public Guid Team2Id { get; set; }
 
     public int Team1Score { get; set; }
 

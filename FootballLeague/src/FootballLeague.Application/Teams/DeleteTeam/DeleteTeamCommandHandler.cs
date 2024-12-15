@@ -24,7 +24,7 @@ internal class DeleteTeamCommandHandler : IRequestHandler<DeleteTeamCommand>
 
     public async Task Handle(DeleteTeamCommand request, CancellationToken cancellationToken)
     {
-        Team team = await _teamRepository.GetByIdAsync(request.Id);
+        Team? team = await _teamRepository.GetByIdAsync(request.Id);
 
         if (team is null)
         {

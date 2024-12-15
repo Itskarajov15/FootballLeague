@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FootballLeague.Application.Dtos.Match;
 using FootballLeague.Application.Dtos.Team;
+using FootballLeague.Domain.Matches;
 using FootballLeague.Domain.Teams;
-using System.Text.RegularExpressions;
 
 namespace FootballLeague.Application.Common.Mappings;
 
