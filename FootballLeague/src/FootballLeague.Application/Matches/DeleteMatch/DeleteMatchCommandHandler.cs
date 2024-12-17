@@ -34,21 +34,24 @@ internal sealed class DeleteMatchCommandHandler : IRequestHandler<DeleteMatchCom
             throw new NotFoundException(nameof(Match), request.MatchId);
         }
 
-        var results = await Task.WhenAll(new[]
-        {
-            _teamRepository.GetByIdAsync(match.Team1Id),
-            _teamRepository.GetByIdAsync(match.Team2Id)
-        });
+        Team? team1 = await _teamRepository.GetByIdAsync(match.Team1Id);
 
-        if (results[0] is null || results[1] is null)
+        if (team1 is null)
         {
-            throw new NotFoundException(nameof(Team), results[0] is null ? match.Team1Id : match.Team2Id);
+            throw new NotFoundException(nameof(Team), match.Team1Id);
         }
 
-        _matchScoreService.RemovePointsFromTeams(match, results[0], results[1]);
+        Team? team2 = await _teamRepository.GetByIdAsync(match.Team2Id);
 
-        _teamRepository.Update(results[0]);
-        _teamRepository.Update(results[1]);
+        if (team2 is null)
+        {
+            throw new NotFoundException(nameof(Team), match.Team2Id);
+        }
+
+        _matchScoreService.RemovePointsFromTeams(match, team1, team2);
+
+        _teamRepository.Update(team1);
+        _teamRepository.Update(team2);
         _matchRepository.Delete(match);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);

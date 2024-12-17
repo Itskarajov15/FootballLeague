@@ -4,6 +4,8 @@ using FootballLeague.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseCustomSerilog();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

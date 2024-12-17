@@ -10,6 +10,8 @@ services:
       dockerfile: src/FootballLeague.API/Dockerfile
     depends_on:
        - footballLeagueDB
+    volumes:
+       - log-data:/logs
 
   footballLeagueDB:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -24,3 +26,4 @@ services:
 
 volumes:
   sqldata:
+  log-data:

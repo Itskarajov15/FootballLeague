@@ -27,15 +27,18 @@ internal sealed class AddMatchCommandHandler : IRequestHandler<AddMatchCommand, 
 
     public async Task<Guid> Handle(AddMatchCommand request, CancellationToken cancellationToken)
     {
-        var results = await Task.WhenAll(new[]
-        {
-            _teamRepository.GetByIdAsync(request.Team1Id),
-            _teamRepository.GetByIdAsync(request.Team2Id)
-        });
+        Team? team1 = await _teamRepository.GetByIdAsync(request.Team1Id);
 
-        if (results[0] is null || results[1] is null)
+        if (team1 is null)
         {
-            throw new NotFoundException(nameof(Team), results[0] is null ? request.Team1Id : request.Team2Id);
+            throw new NotFoundException(nameof(Team), request.Team1Id);
+        }
+
+        Team? team2 = await _teamRepository.GetByIdAsync(request.Team2Id);
+
+        if (team2 is null)
+        {
+            throw new NotFoundException(nameof(Team), request.Team2Id);
         }
 
         Match match = Match.Create(
@@ -45,11 +48,11 @@ internal sealed class AddMatchCommandHandler : IRequestHandler<AddMatchCommand, 
             request.Team2Score,
             request.MatchDate);
 
-        _matchScoreService.AddPointsToTeams(match, results[0], results[1]);
+        _matchScoreService.AddPointsToTeams(match, team1, team2);
 
         _matchRepository.Add(match);
-        _teamRepository.Update(results[0]);
-        _teamRepository.Update(results[1]);
+        _teamRepository.Update(team1);
+        _teamRepository.Update(team2);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
